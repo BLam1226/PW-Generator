@@ -15,57 +15,58 @@
 
 // Function to generate a random password
 function generatePassword() {
-  // Prompt for password criteria
-  var length = parseInt(prompt("Enter the length of the password (between 8 and 128 characters):"));
-  
-  // Validate the length input
-  while (isNaN(length) || length < 8 || length > 128) {
-    length = parseInt(prompt("Invalid length! Enter the length of the password (between 8 and 128 characters):"));
+  // Prompt for password length
+  var length = parseInt(prompt("Enter the desired password length (between 8 and 128):"));
+
+  // Validate password length
+  if (isNaN(length) || length < 8 || length > 128) {
+    alert("Invalid password length. Please enter a number between 8 and 128.");
+    return;
   }
-  
-  var includeLowercase = confirm("Include lowercase characters?");
-  var includeUppercase = confirm("Include uppercase characters?");
+
+  // Prompt for character types
+  var includeLowercase = confirm("Include lowercase letters?");
+  var includeUppercase = confirm("Include uppercase letters?");
   var includeNumeric = confirm("Include numeric characters?");
-  var includeSpecial = confirm("Include special characters?");
-  
-  // Validate that at least one character type is selected
-  while (!includeLowercase && !includeUppercase && !includeNumeric && !includeSpecial) {
-    alert("You must select at least one character type!");
-    includeLowercase = confirm("Include lowercase characters?");
-    includeUppercase = confirm("Include uppercase characters?");
-    includeNumeric = confirm("Include numeric characters?");
-    includeSpecial = confirm("Include special characters?");
+  var includeSpecialChars = confirm("Include special characters?");
+
+  // Validate at least one character type is selected
+  if (!includeLowercase && !includeUppercase && !includeNumeric && !includeSpecialChars) {
+    alert("At least one character type must be selected.");
+    return;
   }
-  
+
   // Define character pools based on selected criteria
   var lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
   var uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var numericChars = "0123456789";
-  var specialChars = "!@#$%^&*()_+~`|}{[]\:;?><,./-=";
-  
-  var password = "";
-  
-  // Generate the password based on selected criteria
-  while (password.length < length) {
-    if (includeLowercase && password.length < length) {
-      password += lowercaseChars.charAt(Math.floor(Math.random() * lowercaseChars.length));
-    }
-    if (includeUppercase && password.length < length) {
-      password += uppercaseChars.charAt(Math.floor(Math.random() * uppercaseChars.length));
-    }
-    if (includeNumeric && password.length < length) {
-      password += numericChars.charAt(Math.floor(Math.random() * numericChars.length));
-    }
-    if (includeSpecial && password.length < length) {
-      password += specialChars.charAt(Math.floor(Math.random() * specialChars.length));
-    }
+  var specialChars = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
+
+  // Build character pool based on selected criteria
+  var characterPool = "";
+  if (includeLowercase) {
+    characterPool += lowercaseChars;
   }
-  
-  return password;
+  if (includeUppercase) {
+    characterPool += uppercaseChars;
+  }
+  if (includeNumeric) {
+    characterPool += numericChars;
+  }
+  if (includeSpecialChars) {
+    characterPool += specialChars;
+  }
+
+  // Generate password
+  var password = "";
+  for (var i = 0; i < length; i++) {
+    var randomIndex = Math.floor(Math.random() * characterPool.length);
+    password += characterPool.charAt(randomIndex);
+  }
+
+  // Display the generated password
+  alert("Your generated password is:\n" + password);
 }
 
-// Call the generatePassword function when the button is clicked
-document.getElementById("generateButton").addEventListener("click", function() {
-  var password = generatePassword();
-  alert("Your generated password is: " + password);
-});
+// Attach event listener to a button for generating the password
+document.getElementById("generatePasswordBtn").addEventListener("click", generatePassword);
