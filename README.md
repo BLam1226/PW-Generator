@@ -19,6 +19,7 @@ N/A
 Click the Generate Password Button and select parameters to generate a random password of the desired length.
 
 Webpage: [https://blam1226.github.io/PW-Generator/]
+![Screenshot 2023-06-15 024620](https://github.com/BLam1226/PW-Generator/assets/127125695/733e3694-03a2-4ca4-a2a2-a4a0ec2a290f)
 
 ### Credits
 
