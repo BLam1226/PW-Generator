@@ -3,18 +3,6 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-
-}
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
-
-// Function to generate a random password
-function generatePassword() {
   // Prompt for password length
   var length = parseInt(prompt("Enter the desired password length (between 8 and 128):"));
 
@@ -58,7 +46,7 @@ function generatePassword() {
   }
 
   // Generate password
-  var password = "";
+  var password = " ";
   for (var i = 0; i < length; i++) {
     var randomIndex = Math.floor(Math.random() * characterPool.length);
     password += characterPool.charAt(randomIndex);
@@ -66,7 +54,11 @@ function generatePassword() {
 
   // Display the generated password
   alert("Your generated password is:\n" + password);
+  var passwordText = document.querySelector("#password");
+
+  passwordText.value = password;
 }
 
-// Attach event listener to a button for generating the password
-document.getElementById("generatePasswordBtn").addEventListener("click", generatePassword);
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);
+
